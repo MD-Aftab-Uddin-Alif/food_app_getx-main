@@ -10,6 +10,12 @@ class FoodPageBody extends StatefulWidget {
 class _FoodPageBodyState extends State<FoodPageBody> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: PageView.builder(
+          itemCount: 5,
+          itemBuilder: (context, position) {
+            return Container();
+          }),
+    );
   }
 }
