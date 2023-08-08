@@ -66,6 +66,7 @@ class RecommenedFoodDetail extends StatelessWidget {
           ),
         ],
       ),
+      /* -------------------------- Bottom navigation bar ------------------------- */
       bottomNavigationBar: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

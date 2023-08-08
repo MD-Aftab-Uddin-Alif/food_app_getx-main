@@ -40,7 +40,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        //slider section
+        /* ----------------------------- slider section ----------------------------- */
         SizedBox(
           //color: Colors.redAccent,
           height: Dimensions.pageView,
@@ -51,7 +51,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                 return _buildPageItem(position);
               }),
         ),
-        //Dots
+        /* ---------------------------------- Dots ---------------------------------- */
         DotsIndicator(
           dotsCount: 5,
           position: _currPageValue.toInt(),
@@ -63,7 +63,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                 borderRadius: BorderRadius.circular(5.0)),
           ),
         ),
-        //Popular text
+        /* ------------------------------ Popular text ------------------------------ */
         SizedBox(
           height: Dimensions.height30,
         ),
@@ -92,7 +92,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             ],
           ),
         ),
-        //List of food and images
+        /* ------------------------- List of food and images ------------------------ */
         ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,

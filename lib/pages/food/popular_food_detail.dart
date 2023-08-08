@@ -87,6 +87,7 @@ class PopularFoodDetail extends StatelessWidget {
           ),
         ],
       ),
+      /* -------------------------- Bottom navigation bar ------------------------- */
       bottomNavigationBar: Container(
         height: 120,
         padding: EdgeInsets.only(
