@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:food_app_getx/controllers/popular_product_controller.dart';
 import 'package:food_app_getx/pages/home/main_food_page.dart';
+import 'package:food_app_getx/util/app_constants.dart';
 import 'package:food_app_getx/util/colors.dart';
 import 'package:food_app_getx/util/dimensions.dart';
 import 'package:food_app_getx/widgets/app_column.dart';
@@ -9,10 +11,15 @@ import 'package:food_app_getx/widgets/exandable_text_widget.dart';
 import 'package:get/get.dart';
 
 class PopularFoodDetail extends StatelessWidget {
-  const PopularFoodDetail({super.key});
+  final int pageId;
+  const PopularFoodDetail({Key? key, required this.pageId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var product =
+        Get.find<PopularProductController>().popularProductList[pageId];
+    print("page is id $pageId");
+    print("product name is ${product.name}");
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -24,10 +31,12 @@ class PopularFoodDetail extends StatelessWidget {
             child: Container(
               width: double.maxFinite,
               height: Dimensions.popularFoodImgSize,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage('assets/images/logo/burger.jpeg'),
+                  image: NetworkImage(AppConstants.BASE_URL +
+                      AppConstants.UPLOAD_URL +
+                      product.img!),
                 ),
               ),
             ),
@@ -70,8 +79,8 @@ class PopularFoodDetail extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const AppColumn(
-                    text: 'Chinese Side',
+                  AppColumn(
+                    text: product.name!,
                   ),
                   SizedBox(
                     height: Dimensions.height20,
@@ -80,12 +89,11 @@ class PopularFoodDetail extends StatelessWidget {
                   SizedBox(
                     height: Dimensions.height20,
                   ),
-                  const Expanded(
+                  Expanded(
                     child: SingleChildScrollView(
-                      child: ExpandableTextWidget(
-                          text:
-                              'This really is the best veggie burger I\'ve ever had and the taste is so much better than \nIngredients\n1/4 cup ground flax\n1/2 cup water\n3 cups cooked black beans (2 15-oz cans, drained and rinsed)\n1 cup cashews (or almonds, sunflower seeds)\n1 1/2 cups cooked brown rice (or quinoa, white rice)'),
-                    ),
+                        child: ExpandableTextWidget(
+                      text: product.description!,
+                    )),
                   ),
                 ],
               ),
@@ -149,7 +157,7 @@ class PopularFoodDetail extends StatelessWidget {
                 color: AppColors.mainColor,
               ),
               child: BigText(
-                text: '\$10 | Add tor cart',
+                text: '\$ ${product.price!} | Add tor cart',
                 color: Colors.white,
               ),
             ),

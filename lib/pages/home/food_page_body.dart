@@ -52,18 +52,13 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               ? SizedBox(
                   //color: Colors.redAccent,
                   height: Dimensions.pageView,
-                  child: GestureDetector(
-                    onTap: () {
-                      Get.toNamed(RouteHelper.getPopularFood());
-                    },
-                    child: PageView.builder(
-                        controller: pageController,
-                        itemCount: popularProducts.popularProductList.length,
-                        itemBuilder: (context, position) {
-                          return _buildPageItem(position,
-                              popularProducts.popularProductList[position]);
-                        }),
-                  ),
+                  child: PageView.builder(
+                      controller: pageController,
+                      itemCount: popularProducts.popularProductList.length,
+                      itemBuilder: (context, position) {
+                        return _buildPageItem(position,
+                            popularProducts.popularProductList[position]);
+                      }),
                 )
               : const CircularProgressIndicator(
                   color: AppColors.mainColor,
@@ -114,6 +109,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             ],
           ),
         ),
+        /* ---------------------------- recommended food ---------------------------- */
+
         /* ------------------------- List of food and images ------------------------ */
         GetBuilder<RecommendedProductController>(builder: (recommendedProduct) {
           return recommendedProduct.isLoaded
@@ -124,7 +121,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        Get.toNamed(RouteHelper.getRecommendedFood());
+                        Get.toNamed(RouteHelper.getRecommendedFood(index));
                       },
                       child: Container(
                         margin: EdgeInsets.only(
@@ -252,20 +249,25 @@ class _FoodPageBodyState extends State<FoodPageBody> {
       transform: matrix,
       child: Stack(
         children: [
-          Container(
-            height: Dimensions.pageViewContainer,
-            margin: EdgeInsets.only(
-                left: Dimensions.width10, right: Dimensions.width10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(Dimensions.radius30),
-              color: index.isEven
-                  ? const Color(0xFF69c5df)
-                  : const Color.fromRGBO(146, 148, 204, 1),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(AppConstants.BASE_URL +
-                    AppConstants.UPLOAD_URL +
-                    popularProduct.img!),
+          GestureDetector(
+            onTap: () {
+              Get.toNamed(RouteHelper.getPopularFood(index));
+            },
+            child: Container(
+              height: Dimensions.pageViewContainer,
+              margin: EdgeInsets.only(
+                  left: Dimensions.width10, right: Dimensions.width10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Dimensions.radius30),
+                color: index.isEven
+                    ? const Color(0xFF69c5df)
+                    : const Color.fromRGBO(146, 148, 204, 1),
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(AppConstants.BASE_URL +
+                      AppConstants.UPLOAD_URL +
+                      popularProduct.img!),
+                ),
               ),
             ),
           ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:food_app_getx/controllers/recommended_product_controller.dart';
 import 'package:food_app_getx/routes/route_helper.dart';
+import 'package:food_app_getx/util/app_constants.dart';
 import 'package:food_app_getx/util/colors.dart';
 import 'package:food_app_getx/util/dimensions.dart';
 import 'package:food_app_getx/widgets/app_icon.dart';
@@ -8,10 +10,14 @@ import 'package:food_app_getx/widgets/exandable_text_widget.dart';
 import 'package:get/get.dart';
 
 class RecommenedFoodDetail extends StatelessWidget {
-  const RecommenedFoodDetail({super.key});
+  final int pageId;
+  const RecommenedFoodDetail({Key? key, required this.pageId})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var product =
+        Get.find<RecommendedProductController>().recommendedProductList[pageId];
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
@@ -51,8 +57,8 @@ class RecommenedFoodDetail extends StatelessWidget {
             backgroundColor: AppColors.yellowColor,
             expandedHeight: 300,
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset(
-                'assets/images/logo/burger.jpeg',
+              background: Image.network(
+                AppConstants.BASE_URL + AppConstants.UPLOAD_URL + product.img!,
                 width: double.maxFinite,
                 fit: BoxFit.cover,
               ),
@@ -64,9 +70,9 @@ class RecommenedFoodDetail extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(
                       left: Dimensions.width20, right: Dimensions.width20),
-                  child: const ExpandableTextWidget(
-                      text:
-                          'The EASSy project offers a solution to infrastructural Internet access problems in Eastern Africa. It responds to a critical need for an effective and affordable Internet connection in a large region of Africa. The EASSy project intervenes in a sub-developed market. There are few direct high-capacity Internet links between and within African countries, and high-capacity transmission lines are mainly concentrated in the US, Europe and Asia. As a result, about 75% of Internet traffic in Africa first goes through Europe or the US, and is then routed back, a very costly process. For example, while Benin and Burkina Faso are neighbors, Internet traffic between them passes through France or Canada. The International Development Research Centre (IDRC) in Canada estimates that Africa spends at least 400 million each year on the use of international bandwidth for national or regional data. In fact, in many cases, e-mails sent between two Internet service providers in the same country are sent abroad and then rerouted back because domestic Internet Exchange Points (IXP) are lacking. Africa is currently dependent on the SAT-3 cable, and on expensive satellite links, the only option in some Eastern African countries. These satellite connections have inherent delays and do not offer competitive pricing conditions. The slow pace of Internet development on the continent is reflected in low levels of use. Low-speed transmission lines also mean that Internet users in Africa find it much faster and cheaper to download material rather than to post their own onto the Internet. These conditions consign Africans to serve primarily as consumers instead of producers of web content.The EASSy project offers a solution to infrastructural Internet access problems in Eastern Africa. It responds to a critical need for an effective and affordable Internet connection in a large region of Africa. The EASSy project intervenes in a sub-developed market. There are few direct high-capacity Internet links between and within African countries, and high-capacity transmission lines are mainly concentrated in the US, Europe and Asia. As a result, about 75% of Internet traffic in Africa first goes through Europe or the US, and is then routed back, a very costly process. For example, while Benin and Burkina Faso are neighbors, Internet traffic between them passes through France or Canada. The International Development Research Centre (IDRC) in Canada estimates that Africa spends at least 400 million each year on the use of international bandwidth for national or regional data. In fact, in many cases, e-mails sent between two Internet service providers in the same country are sent abroad and then rerouted back because domestic Internet Exchange Points (IXP) are lacking. Africa is currently dependent on the SAT-3 cable, and on expensive satellite links, the only option in some Eastern African countries. These satellite connections have inherent delays and do not offer competitive pricing conditions. The slow pace of Internet development on the continent is reflected in low levels of use. Low-speed transmission lines also mean that Internet users in Africa find it much faster and cheaper to download material rather than to post their own onto the Internet. These conditions consign Africans to serve primarily as consumers instead of producers of web content.'),
+                  child: ExpandableTextWidget(
+                    text: product.description!,
+                  ),
                 ),
               ],
             ),
@@ -93,7 +99,7 @@ class RecommenedFoodDetail extends StatelessWidget {
                     backgroundColor: AppColors.mainColor,
                     icon: Icons.remove),
                 BigText(
-                  text: '\$12.88  X  0',
+                  text: '\$ ${product.price!}  X  0',
                   color: AppColors.mainBlackColor,
                   size: Dimensions.font26,
                 ),
