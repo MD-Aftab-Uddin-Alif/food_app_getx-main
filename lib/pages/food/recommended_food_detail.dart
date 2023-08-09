@@ -49,7 +49,7 @@ class RecommenedFoodDetail extends StatelessWidget {
                   ),
                 ),
                 child: Center(
-                  child: BigText(size: Dimensions.font26, text: 'Chinese Side'),
+                  child: BigText(size: Dimensions.font26, text: product.name!),
                 ),
               ),
             ),
