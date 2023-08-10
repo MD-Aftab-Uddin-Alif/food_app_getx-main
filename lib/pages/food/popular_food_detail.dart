@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_app_getx/controllers/cart_controller.dart';
 import 'package:food_app_getx/controllers/popular_product_controller.dart';
+import 'package:food_app_getx/pages/cart/cart_page.dart';
 import 'package:food_app_getx/pages/home/main_food_page.dart';
 import 'package:food_app_getx/util/app_constants.dart';
 import 'package:food_app_getx/util/colors.dart';
@@ -60,14 +61,19 @@ class PopularFoodDetail extends StatelessWidget {
                     children: [
                       const AppIcon(icon: Icons.shopping_cart_outlined),
                       Get.find<PopularProductController>().totalItems >= 1
-                          ? const Positioned(
+                          ? Positioned(
                               right: 0,
                               top: 0,
-                              child: AppIcon(
-                                icon: Icons.circle,
-                                size: 20,
-                                iconColor: Colors.transparent,
-                                backgroundColor: AppColors.mainColor,
+                              child: GestureDetector(
+                                onTap: () {
+                                  Get.to(() => const CartPage());
+                                },
+                                child: const AppIcon(
+                                  icon: Icons.circle,
+                                  size: 20,
+                                  iconColor: Colors.transparent,
+                                  backgroundColor: AppColors.mainColor,
+                                ),
                               ),
                             )
                           : Container(),
@@ -193,20 +199,20 @@ class PopularFoodDetail extends StatelessWidget {
                     ],
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.only(
-                      top: Dimensions.height20,
-                      bottom: Dimensions.height20,
-                      left: Dimensions.width20,
-                      right: Dimensions.width20),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(Dimensions.radius20),
-                    color: AppColors.mainColor,
-                  ),
-                  child: GestureDetector(
-                    onTap: () {
-                      popularProduct.addItem(product);
-                    },
+                GestureDetector(
+                  onTap: () {
+                    popularProduct.addItem(product);
+                  },
+                  child: Container(
+                    padding: EdgeInsets.only(
+                        top: Dimensions.height20,
+                        bottom: Dimensions.height20,
+                        left: Dimensions.width20,
+                        right: Dimensions.width20),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(Dimensions.radius20),
+                      color: AppColors.mainColor,
+                    ),
                     child: BigText(
                       text: '\$ ${product.price!} | Add tor cart',
                       color: Colors.white,

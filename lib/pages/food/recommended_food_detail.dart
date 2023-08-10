@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:food_app_getx/controllers/cart_controller.dart';
 import 'package:food_app_getx/controllers/popular_product_controller.dart';
 import 'package:food_app_getx/controllers/recommended_product_controller.dart';
+import 'package:food_app_getx/pages/cart/cart_page.dart';
 import 'package:food_app_getx/routes/route_helper.dart';
 import 'package:food_app_getx/util/app_constants.dart';
 import 'package:food_app_getx/util/colors.dart';
@@ -19,6 +21,8 @@ class RecommenedFoodDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     var product =
         Get.find<RecommendedProductController>().recommendedProductList[pageId];
+    Get.find<PopularProductController>()
+        .initProduct(product, Get.find<CartController>());
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
@@ -34,7 +38,44 @@ class RecommenedFoodDetail extends StatelessWidget {
                       Get.toNamed(RouteHelper.getInitial());
                     },
                     child: const AppIcon(icon: Icons.clear)),
-                const AppIcon(icon: Icons.shopping_cart_outlined)
+                // const AppIcon(icon: Icons.shopping_cart_outlined)
+                GetBuilder<PopularProductController>(builder: (controller) {
+                  return Stack(
+                    children: [
+                      const AppIcon(icon: Icons.shopping_cart_outlined),
+                      Get.find<PopularProductController>().totalItems >= 1
+                          ? Positioned(
+                              right: 0,
+                              top: 0,
+                              child: GestureDetector(
+                                onTap: () {
+                                  Get.to(() => const CartPage());
+                                },
+                                child: const AppIcon(
+                                  icon: Icons.circle,
+                                  size: 20,
+                                  iconColor: Colors.transparent,
+                                  backgroundColor: AppColors.mainColor,
+                                ),
+                              ),
+                            )
+                          : Container(),
+                      Get.find<PopularProductController>().totalItems >= 1
+                          ? Positioned(
+                              right: 3,
+                              top: 3,
+                              child: BigText(
+                                text: Get.find<PopularProductController>()
+                                    .totalItems
+                                    .toString(),
+                                size: 12,
+                                color: Colors.white,
+                              ),
+                            )
+                          : Container()
+                    ],
+                  );
+                }),
               ],
             ),
             bottom: PreferredSize(
