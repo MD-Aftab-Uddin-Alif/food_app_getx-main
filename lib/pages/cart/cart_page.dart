@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_app_getx/controllers/cart_controller.dart';
-import 'package:food_app_getx/pages/home/main_food_page.dart';
+import 'package:food_app_getx/routes/route_helper.dart';
 import 'package:food_app_getx/util/app_constants.dart';
 import 'package:food_app_getx/util/colors.dart';
 import 'package:food_app_getx/util/dimensions.dart';
@@ -35,7 +35,7 @@ class CartPage extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Get.to(() => const MainFoodPage());
+                    Get.toNamed(RouteHelper.getInitial());
                   },
                   child: AppIcon(
                     icon: Icons.home_outlined,
@@ -65,8 +65,10 @@ class CartPage extends StatelessWidget {
                 context: context,
                 removeTop: true,
                 child: GetBuilder<CartController>(builder: (cartController) {
+                  var cartList = cartController.getItems;
+
                   return ListView.builder(
-                      itemCount: cartController.getItems.length,
+                      itemCount: cartList.length,
                       itemBuilder: (_, index) {
                         return SizedBox(
                           width: double.maxFinite,
@@ -147,8 +149,9 @@ class CartPage extends StatelessWidget {
                                                   width: Dimensions.width10 / 2,
                                                 ),
                                                 BigText(
-                                                    text:
-                                                        '0'), // popularProduct.inCartItems.toString()),
+                                                    text: cartList[index]
+                                                        .quantity
+                                                        .toString()), // popularProduct.inCartItems.toString()),
                                                 SizedBox(
                                                   width: Dimensions.width10 / 2,
                                                 ),
