@@ -1,9 +1,9 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:food_app_getx/controllers/popular_product_controller.dart';
 import 'package:food_app_getx/controllers/recommended_product_controller.dart';
 import 'package:food_app_getx/routes/route_helper.dart';
+import 'package:food_app_getx/util/dimensions.dart';
 import 'package:get/get.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -49,14 +49,14 @@ class _SplashScreenState extends State<SplashScreen>
             child: Center(
               child: Image.asset(
                 'assets/images/logo/Splash1.png',
-                width: 250,
+                width: Dimensions.splashimg,
               ),
             ),
           ),
           Center(
             child: Image.asset(
               'assets/images/logo/Splash2.png',
-              width: 250,
+              width: Dimensions.splashimg,
             ),
           ),
         ],
