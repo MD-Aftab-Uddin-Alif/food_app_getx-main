@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_app_getx/controllers/cart_controller.dart';
 import 'package:food_app_getx/controllers/popular_product_controller.dart';
-import 'package:food_app_getx/pages/home/main_food_page.dart';
 import 'package:food_app_getx/routes/route_helper.dart';
 import 'package:food_app_getx/util/app_constants.dart';
 import 'package:food_app_getx/util/colors.dart';
@@ -14,7 +13,9 @@ import 'package:get/get.dart';
 
 class PopularFoodDetail extends StatelessWidget {
   final int pageId;
-  const PopularFoodDetail({Key? key, required this.pageId}) : super(key: key);
+  final String page;
+  const PopularFoodDetail({Key? key, required this.pageId, required this.page})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +54,11 @@ class PopularFoodDetail extends StatelessWidget {
               children: [
                 GestureDetector(
                     onTap: () {
-                      Get.to(() => const MainFoodPage());
+                      if (page == 'cartpage') {
+                        Get.toNamed(RouteHelper.getCartPage());
+                      } else {
+                        Get.toNamed(RouteHelper.getInitial());
+                      }
                     },
                     child: const AppIcon(icon: Icons.arrow_back_ios)),
                 GetBuilder<PopularProductController>(builder: (controller) {
