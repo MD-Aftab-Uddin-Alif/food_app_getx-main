@@ -1,7 +1,7 @@
 import 'package:food_app_getx/pages/cart/cart_page.dart';
 import 'package:food_app_getx/pages/food/popular_food_detail.dart';
 import 'package:food_app_getx/pages/food/recommended_food_detail.dart';
-import 'package:food_app_getx/pages/home/main_food_page.dart';
+import 'package:food_app_getx/pages/home/home_page.dart';
 import 'package:get/get.dart';
 
 class RouteHelper {
@@ -18,7 +18,7 @@ class RouteHelper {
   static String getCartPage() => cartPage;
 
   static List<GetPage> routes = [
-    GetPage(name: "/", page: () => const MainFoodPage()),
+    GetPage(name: "/", page: () => const HomePage()),
     GetPage(
         name: popularFood,
         page: () {
