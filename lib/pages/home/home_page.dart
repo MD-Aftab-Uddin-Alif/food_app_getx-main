@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app_getx/pages/cart/cart_history.dart';
 import 'package:food_app_getx/pages/home/main_food_page.dart';
 import 'package:food_app_getx/util/colors.dart';
 
@@ -15,15 +16,9 @@ class _HomePageState extends State<HomePage> {
 
   List pages = [
     const MainFoodPage(),
-    Container(
-      child: const Center(child: Text('Next page')),
-    ),
-    Container(
-      child: const Center(child: Text('Next next page')),
-    ),
-    Container(
-      child: const Center(child: Text('Next next next page')),
-    ),
+    const Center(child: Text('Next page')),
+    const CartHistory(),
+    const Center(child: Text('Next next next page')),
   ];
 
   void onTapNav(int index) {
@@ -40,15 +35,9 @@ class _HomePageState extends State<HomePage> {
   List<Widget> _buildScreens() {
     return [
       const MainFoodPage(),
-      Container(
-        child: const Center(child: Text('Next page')),
-      ),
-      Container(
-        child: const Center(child: Text('Next next page')),
-      ),
-      Container(
-        child: const Center(child: Text('Next next next page')),
-      ),
+      const Center(child: Text('Next page')),
+      const Center(child: Text('Next next page')),
+      const Center(child: Text('Next next next page')),
     ];
   }
 
