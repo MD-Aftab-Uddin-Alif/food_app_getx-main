@@ -19,6 +19,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.find<CartController>().getCartData();
+    Get.find<PopularProductController>().getPopularProductList();
+    Get.find<RecommendedProductController>().recommendedProductList;
     return GetBuilder<PopularProductController>(builder: (_) {
       return GetBuilder<RecommendedProductController>(builder: (_) {
         return GetMaterialApp(

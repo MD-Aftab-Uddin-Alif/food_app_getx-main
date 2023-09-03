@@ -34,7 +34,7 @@ class ProductModel {
   String? name;
   String? description;
   int? price;
-  String? stars;
+  int? stars;
   String? img;
   String? location;
   String? createdAt;
