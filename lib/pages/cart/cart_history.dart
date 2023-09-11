@@ -146,7 +146,7 @@ class CartHistory extends StatelessWidget {
                                         color: AppColors.titleColor,
                                       ),
                                       BigText(
-                                        text: '${itemsPerOrder[i]} Items',
+                                        text: '${itemsPerOrder[i].toString()} Items',
                                         color: AppColors.titleColor,
                                       ),
                                       GestureDetector(
@@ -158,6 +158,8 @@ class CartHistory extends StatelessWidget {
                                               j++) {
                                             if (getCartHistoryList[j].time ==
                                                 orderTime[i]) {
+
+                                              //print('Product info is'+jsonEncode(getCartHistoryList[j]));
                                               moreOrder.putIfAbsent(
                                                   getCartHistoryList[i].id!,
                                                   () => CartModel.fromJson(
