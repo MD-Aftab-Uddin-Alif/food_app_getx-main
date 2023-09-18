@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:food_app_getx/models/cart_model.dart';
 import 'package:food_app_getx/util/app_constants.dart';
@@ -40,16 +41,19 @@ class CartRepo {
   }
 
   List<CartModel> getCartHistoryList() {
-    if (sharedPreferences.containsKey(AppConstants.CART_HISTORY_LIST)) {
-      //cartHistory = [];
+    try {
+      if (sharedPreferences.containsKey(AppConstants.CART_HISTORY_LIST)) {
+      cartHistory = [];
       cartHistory =
           sharedPreferences.getStringList(AppConstants.CART_HISTORY_LIST)!;
     }
     List<CartModel> cartListHistory = [];
-    for (var element in cartHistory) {
-      cartListHistory.add(CartModel.fromJson(jsonDecode(element)));
-    }
+    cartHistory.forEach((element)=>cartListHistory.add(CartModel.fromJson(jsonDecode(element))));
     return cartListHistory;
+    } catch (e) {
+      print(e.toString()+'getCartHistoryList');
+    }
+    return [];
   }
 
   void addToCartHistoryList() {
@@ -58,11 +62,13 @@ class CartRepo {
           sharedPreferences.getStringList(AppConstants.CART_HISTORY_LIST)!;
     }
     for (int i = 0; i < cart.length; i++) {
+      print('history list'+cart[i]);
       cartHistory.add(cart[i]);
     }
     removeCart();
     sharedPreferences.setStringList(
         AppConstants.CART_HISTORY_LIST, cartHistory);
+        print('The length of history list is '+getCartHistoryList().length.toString());
   }
 
   void removeCart() {
