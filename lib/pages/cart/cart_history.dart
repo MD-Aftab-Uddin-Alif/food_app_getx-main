@@ -159,7 +159,7 @@ class CartHistory extends StatelessWidget {
                                             if (getCartHistoryList[j].time ==
                                                 orderTime[i]) {
 
-                                              //print('Product info is'+jsonEncode(getCartHistoryList[j]));
+                                              print('Product info is${jsonEncode(getCartHistoryList[j])}');
                                               moreOrder.putIfAbsent(
                                                   getCartHistoryList[i].id!,
                                                   () => CartModel.fromJson(

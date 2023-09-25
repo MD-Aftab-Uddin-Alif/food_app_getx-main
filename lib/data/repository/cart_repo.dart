@@ -48,10 +48,13 @@ class CartRepo {
           sharedPreferences.getStringList(AppConstants.CART_HISTORY_LIST)!;
     }
     List<CartModel> cartListHistory = [];
-    cartHistory.forEach((element)=>cartListHistory.add(CartModel.fromJson(jsonDecode(element))));
+    print(cartHistory);
+    for (var element in cartHistory) {
+      cartListHistory.add(CartModel.fromJson(jsonDecode(element)));
+    }
     return cartListHistory;
     } catch (e) {
-      print(e.toString()+'getCartHistoryList');
+      print('${e}getCartHistoryList');
     }
     return [];
   }
@@ -62,13 +65,13 @@ class CartRepo {
           sharedPreferences.getStringList(AppConstants.CART_HISTORY_LIST)!;
     }
     for (int i = 0; i < cart.length; i++) {
-      print('history list'+cart[i]);
+      print('history list${cart[i]}');
       cartHistory.add(cart[i]);
     }
     removeCart();
     sharedPreferences.setStringList(
         AppConstants.CART_HISTORY_LIST, cartHistory);
-        print('The length of history list is '+getCartHistoryList().length.toString());
+        print('The length of history list is ${getCartHistoryList().length}');
   }
 
   void removeCart() {
